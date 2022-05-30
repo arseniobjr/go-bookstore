@@ -1,23 +1,17 @@
 package main
 
 import (
-	"github.com/jinzhu/gorm"
+	"log"
+	"net/http"
+
+	"github.com/go-bookstore/pkg/routes"
+	"github.com/gorilla/mux"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
-var (
-	db *gorm.DB
-)
-
-func Connect() {
-	d, err := gorm.Open("mysql",
-		"arseniobjr:Senio/simplerest?charset=utf8&parseTime=True&loc=Local")
-	if err != nil {
-		panic(err)
-	}
-	db = d
-}
-
-func GetDB() *gorm.DB {
-	return db
+func main() {
+	r := mux.NewRoute()
+	routes.RegisterBookStoreRoutes(r)
+	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe("localhost:9010", r))
 }
