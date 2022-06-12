@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-bookstore/pkg/models"
-	"github.com/go-bookstore/pkg/utils"
+	"github.com/arseniobjr/go-bookstore/pkg/models"
+	"github.com/arseniobjr/go-bookstore/pkg/utils"
 	"github.com/gorilla/mux"
 )
 
@@ -74,7 +74,7 @@ func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	if updateBook.Author != "" {
 		bookDetails.Author = updateBook.Author
 	}
-	if updateBook != "" {
+	if updateBook.Publication != "" {
 		bookDetails.Publication = updateBook.Publication
 	}
 	db.Save(&bookDetails)
